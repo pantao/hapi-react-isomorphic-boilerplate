@@ -1,0 +1,49 @@
+body {
+  padding: 0;
+  margin: 0;
+}
+
+nav {
+  background-color: #f8f8f8;
+  padding: 1rem;
+}
+
+nav a {
+  color: #333;
+  display: inline-block;
+  margin-right: 1rem;
+  text-decoration: none;
+}
+
+nav a.current {
+  color: #3da2f4;
+}
+
+button {
+  border: 1px solid #eee;
+  background-color: #f8f8f8;
+  color: #333;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #eee;
+  padding: .5rem;
+}
+
+hr {
+  height: 1px;
+  display: block;
+  border: none;
+  background-color: #eee;
+}
+
+#pusher {
+
+}
+
+#pusher > section {
+  padding: 1rem;
+}

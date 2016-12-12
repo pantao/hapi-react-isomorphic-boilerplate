@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+import Navigator from './Navigator';
 
 class Layout extends Component {
 
@@ -14,6 +15,7 @@ class Layout extends Component {
 
     return (
       <div id="layout">
+        <Navigator { ...this.props } />
         <div id="pusher">
           {childrenWithProps}
         </div>

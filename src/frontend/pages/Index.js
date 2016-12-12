@@ -10,9 +10,7 @@ class Page extends Component {
   render() {
     return (
       <section>
-        <h1>Index Page</h1>
-        <Link to='about'>关于我们</Link>
-        <Link to='testing'>Redux测试</Link>
+        <h1>首页</h1>
       </section>
     );
   }

@@ -8,20 +8,27 @@ class Testing extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props);
+
   }
 
   render() {
+    console.log(this.props);
     return (
       <section>
       <Helmet title='测试' />
-        <h1>Testing Page</h1>
-        <Link to='/'>首页</Link>
-        <Link to='about'>关于我们</Link>
+        <h1>接口与代理测试</h1>
         <br />
-        <button onClick={ this.props.testing }>测试 /api/testing 接口</button>
+        <hr />
+        <button onClick={ this.props.tryTesting }>测试 /api/testing 接口</button>
+        <pre>
+          { JSON.stringify(this.props.testing.data, ' ', 2)}
+        </pre>
         <br />
-        <button onClick={ this.props.testingProxy }>测试 /proixy/testing 代理</button>
+        <hr />
+        <button onClick={ this.props.tryTestingProxy }>测试 /proixy/testing 代理</button>
+        <pre>
+          { JSON.stringify(this.props.testing.proxyData, ' ', 2)}
+        </pre>
       </section>
     );
   }
