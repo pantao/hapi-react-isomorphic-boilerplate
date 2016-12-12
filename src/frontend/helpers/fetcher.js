@@ -76,6 +76,16 @@ class Fetcher {
         let content = '';
         headers = typeof headers === 'object' ? headers : {};
 
+        if(localStorage) {
+          try {
+            let authorization = localStorage.getItem('authorization');
+            authorization = JSON.parse(authorization);
+            headers.authorization = authorization;
+          } catch(e) {
+
+          }
+        }
+
         if (__SERVER__ && request && request.headers.cookie) {
           headers.Cookie = request.headers.cookie;
         }

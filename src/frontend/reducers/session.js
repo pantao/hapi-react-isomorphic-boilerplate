@@ -44,6 +44,9 @@ const session = (state = initialState, action = {}) => {
       }
       break;
     case SIGN_IN_SUCCEED:
+      if(typeof window !== 'undefined') {
+        window.localStorage.setItem('authorization', JSON.stringify(action.data.token));
+      }
       return {
         ...state,
         ...action.data,

@@ -31,7 +31,7 @@ export const validateJsonWebToken = (decoded, request, callback) => {
     credentials
   } = decoded;
 
-  if (!credentials.id) {
+  if (typeof credentials.id === 'undefined') {
     return callback(null, false);
   }
 
