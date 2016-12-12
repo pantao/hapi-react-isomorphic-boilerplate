@@ -1,5 +1,41 @@
 server:
   connection:
     host: 127.0.0.1
-    port: 6000
-    uri: http://127.0.0.1:6000
+    port: 4000
+    uri: http://127.0.0.1:4000
+proxy:
+  enable: true
+  prefix: /proxy
+  options:
+    proxies:
+      -
+        enable: true
+        name: testing
+        uri: http://127.0.0.1:4000
+        passThrough: true
+        xforward: true
+        methods:
+          - GET
+          - POST
+          - PATCH
+          - PUT
+          - DELETE
+          - OPTIONS
+logger:
+  ops:
+    interval: 100000
+  reporters:
+    fileReporter:
+      - module: good-squeeze
+        name: Squeeze
+        args:
+          - ops: '*'
+            error: '*'
+            log: '*'
+            request: '*'
+            response: '*'
+      - module: good-squeeze
+        name: SafeJson
+      - module: good-file
+        args:
+          - 'logs/hrib.log'

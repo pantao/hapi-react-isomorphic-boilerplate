@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import Joi from 'joi';
 
 /**
  * 服务器后端模块
@@ -23,11 +24,16 @@ const register = (server, options, next) => {
 
   if(config.enableTesting) {
     server.route({
-      method: '*',
-      path: '/testing/{params*}',
+      method: ['GET', 'POST', 'PATCH', 'PUT', 'OPTIONS', "DELETE"],
+      path: '/testing/{path*}',
       config: {
         auth: false,
-        tags: ['api', 'testing']
+        tags: ['api', 'testing'],
+        validate: {
+          params: Joi.object().keys({
+            path: Joi.string().allow(null).description('路径')
+          })
+        }
       },
       handler: (request, reply) => {
         reply({

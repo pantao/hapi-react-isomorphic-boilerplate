@@ -1,5 +1,23 @@
 server:
   connection:
     host: 127.0.0.1
-    port: 5000
-    uri: http://127.0.0.1:5000
+    port: 3000
+    uri: http://127.0.0.1:3000
+proxy:
+  enable: true
+  prefix: /proxy
+  options:
+    proxies:
+      -
+        enable: true
+        name: testing
+        uri: http://127.0.0.1:3000
+        passThrough: true
+        xforward: true
+        methods:
+          - GET
+          - POST
+          - PATCH
+          - PUT
+          - DELETE
+          - OPTIONS

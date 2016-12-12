@@ -44,24 +44,7 @@ module.exports = {
       {
         test: /(\.js[x]?|.es6)$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
-        query: {
-          presets: [ 'es2015', 'react', 'stage-0' ],
-          plugins: [
-            [ 'transform-decorators-legacy' ],
-            [ 'transform-runtime' ],
-            [ 'react-transform', {
-              transforms: [{
-                transform: 'react-transform-hmr',
-                imports: [ 'react' ],
-                locals: [ 'module' ],
-              }, {
-                transform: 'react-transform-catch-errors',
-                imports: [ 'react', 'redbox-react' ],
-              }]
-            }]
-          ]
-        }
+        loader: 'babel-loader'
       },
       {
         test: /\.css$/,

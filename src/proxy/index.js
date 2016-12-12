@@ -16,7 +16,7 @@ const register = (server, options, next) => {
 
     const proxies = _(options.proxies).filter( p => p.enable).map( p => {
       return {
-        method: '*',
+        method: p.methods || ['GET', 'POST', 'PATCH', 'PUT', 'OPTIONS', "DELETE"],
         path: `/${p.name}/{path*}`,
         handler: {
           proxy: {

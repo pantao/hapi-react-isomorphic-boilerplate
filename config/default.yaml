@@ -11,8 +11,8 @@ server:
 
   connection:
     host: 127.0.0.1
-    port: 5000
-    uri: http://127.0.0.1:5000
+    port: 3000
+    uri: http://127.0.0.1:3000
 
 public:
   enable: true
@@ -54,9 +54,16 @@ proxy:
       -
         enable: true
         name: testing
-        uri: http://127.0.0.1:5000
+        uri: http://127.0.0.1:3000
         passThrough: true
         xforward: true
+        methods:
+          - GET
+          - POST
+          - PATCH
+          - PUT
+          - DELETE
+          - OPTIONS
 
 swagger:
   enable: true
@@ -65,7 +72,8 @@ swagger:
       title: 'Hapi React Isomorphic Boilerplate'
       description: '本文由 Hapi Swagger 插件自动生成'
     documentationPath: '/developers/documentation'
-    pathPrefixSize: 2
+    pathPrefixSize: 3
+    basePath: /api
     securityDefinitions:
       jwt:
         type: apiKey
@@ -74,3 +82,20 @@ swagger:
       security:
         -
           jwt:
+
+logger:
+  ops:
+    interval: 60000
+  reporters:
+    consoleReporter:
+      - module: good-squeeze
+        name: Squeeze
+        args:
+          - ops: '*'
+            error: '*'
+            log: '*'
+            request: '*'
+            response: '*'
+            server: '*'
+      - module: good-console
+      - stdout
