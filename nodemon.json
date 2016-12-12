@@ -1,0 +1,11 @@
+{
+  "watch": [
+    "src/backend/**.js",
+    "src/proxy/**.js",
+    "src/helpers/**.js",
+    "src/api/**/**",
+    "src/server.js",
+    "src/globals.js",
+    "config/**"
+  ]
+}

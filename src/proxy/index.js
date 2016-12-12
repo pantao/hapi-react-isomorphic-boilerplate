@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 /**
  * 代理模块
  *
@@ -9,6 +11,29 @@
  * @return {mixed}                  多类型返回值
  */
 const register = (server, options, next) => {
+
+  if(_.isObject(options) && _.isArray(options.proxies)) {
+
+    const proxies = _(options.proxies).filter( p => p.enable).map( p => {
+      return {
+        method: '*',
+        path: `/${p.name}/{path*}`,
+        handler: {
+          proxy: {
+            passThrough: p.passThrough,
+            xforward: p.xforward,
+            mapUri: (request, callback) => {
+              const uri = `${p.uri}/${request.params.path}`;
+              console.log(uri);
+              callback(null, uri, request.headers )
+            }
+          }
+        }
+      }
+    }).value();
+    server.route(proxies);
+  }
+
   return next();
 };
 

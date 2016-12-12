@@ -1,0 +1,80 @@
+server:
+  options:
+    debug:
+      request:
+        - error
+        - request-internal
+    connections:
+      state:
+        ignoreErrors: true
+        clearInvalid: true
+
+  connection:
+    host: 127.0.0.1
+    port: 5000
+    uri: http://127.0.0.1:5000
+
+public:
+  enable: true
+  options:
+    path: public
+    redirectToSlash: true
+    index: false
+
+backend:
+  enable: true
+  prefix: /api
+  options:
+    enableTesting: true
+
+frontend:
+  enable: true
+  app:
+    title: 'Hapi React Isomorphic Boilerplate'
+    description: '基于 HapiJS, ReactJS 的前后端同构样板'
+    head:
+      titleTemplate: '%s | HRIB'
+      meta:
+        -
+          charset: utf-8
+        -
+          http-equiv: X-UA-Compatible
+          content: IE=edge
+        -
+          name: viewport
+          content: 'width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1'
+
+proxy:
+  enable: true
+  prefix: /proxy
+  options:
+    proxies:
+      -
+        enable: true
+        name: testing
+        uri: http://127.0.0.1:5000
+        passThrough: true
+        xforward: true
+      -
+        enable: true
+        name: bang
+        uri: http://10.141.4.207:8080
+        passThrough: true
+        xforward: true
+
+swagger:
+  enable: true
+  options:
+    info:
+      title: 'Hapi React Isomorphic Boilerplate'
+      description: '本文由 Hapi Swagger 插件自动生成'
+    documentationPath: '/developers/documentation'
+    pathPrefixSize: 2
+    securityDefinitions:
+      jwt:
+        type: apiKey
+        name: Authorization
+        in: header
+      security:
+        -
+          jwt:
