@@ -1,3 +1,3 @@
 npm i --registry=https://registry.npm.taobao.org
 npm run build
-pm2 start pm2.yaml --env testing
+pm2 startOrRestart ecosystem.config.js --env testing
