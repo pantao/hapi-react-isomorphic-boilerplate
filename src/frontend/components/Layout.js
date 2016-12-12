@@ -7,13 +7,10 @@ class Layout extends Component {
   }
 
   render() {
-    const {globalState} = this.props;
-
     const childrenProps = this.props;
     const childrenWithProps = React.Children.map(this.props.children, child => {
       return React.cloneElement(child, {'children': childrenProps});
     });
-      const { location: { pathname }} = this.props;
 
     return (
       <div id="layout">

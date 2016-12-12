@@ -1,4 +1,5 @@
 import AppContainer from './containers/App';
+import TestingContainer from './containers/Testing';
 
 import IndexPage from './pages/Index';
 import AboutPage from './pages/About';
@@ -14,6 +15,9 @@ export default store => {
     childRoutes: [{
       path: '/about',
       component: AboutPage
+    },{
+      path: '/testing',
+      component: TestingContainer
     }]
   }];
 };

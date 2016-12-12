@@ -7,7 +7,7 @@ import {
 import * as userAgentActions from '../actions/userAgent';
 import * as testingActions from '../actions/testing';
 
-import App from '../components/App';
+import Testing from '../components/Testing';
 
 const mapStateToProps = state => {
   return {
@@ -26,4 +26,4 @@ const mapDispatchToProps = dispatch => {
   }, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(Testing)

@@ -6,7 +6,7 @@ const initialState = {
 
 }
 
-const userAgent = (state = initialState, action = {}) => {
+const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case SET_USER_AGENT:
       const ua = action.userAgent;
@@ -20,4 +20,4 @@ const userAgent = (state = initialState, action = {}) => {
   }
 }
 
-export default userAgent;
+export default reducer;

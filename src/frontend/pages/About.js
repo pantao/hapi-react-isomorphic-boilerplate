@@ -12,6 +12,7 @@ class Page extends Component {
       <section>
         <h1>About Page</h1>
         <Link to='/'>返回首页</Link>
+        <Link to='testing'>Redux测试</Link>
       </section>
     );
   }

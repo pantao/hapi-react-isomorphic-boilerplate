@@ -9,11 +9,10 @@ class App extends Component {
   }
 
   render() {
-    console.log('APP: ', this.props);
     return (
       <div id='app'>
         <Helmet {...__FRONTEND__.head} />
-        <Layout { ...this.props } id='app-layout' />
+        <Layout { ...this.props } />
       </div>
     )
   }

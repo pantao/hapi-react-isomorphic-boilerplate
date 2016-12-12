@@ -10,16 +10,15 @@ const methods = ['get', 'post', 'put', 'patch', 'del'];
  * @param  {String} [path=''] [description]
  * @return {[type]}           [description]
  */
-const formatUrl = (path = '') => {
+const formatUrl = (path = '', scope = '') => {
   const adjusted = path[0] !== '/' ? `/${path}` : path;
 
-  const host = SERVER_HOST ? SERVER_HOST : '127.0.0.1';
-
   if (__SERVER__) {
+    const host = SERVER_HOST ? SERVER_HOST : '127.0.0.1';
     // 若是在服务器上，则将路径转换为带协议、主机名以及端口号的完整路径
     return `${SERVER_PROTOCOL}${host}:${SERVER_PORT}${API_PREFIX}${adjusted}`;
   }
-  return `${API_PREFIX}${adjusted}`;
+  return `${scope || ''}${adjusted}`;
 }
 
 /**
