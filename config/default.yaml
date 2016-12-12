@@ -29,7 +29,8 @@ backend:
 
 frontend:
   enable: true
-  app:
+  options: {}
+  global:
     title: 'Hapi React Isomorphic Boilerplate'
     description: '基于 HapiJS, ReactJS 的前后端同构样板'
     head:

@@ -10,7 +10,9 @@ import Swagger from 'hapi-swagger';
 import H2o2 from 'h2o2';
 
 import backend from './backend';
+import frontend from './frontend';
 import proxy from './proxy';
+import webpack from './webpack';
 
 const getConfig = endpoint => {
   return JSON.parse(JSON.stringify(Config.get(endpoint)));
@@ -52,6 +54,17 @@ const boot = callback => {
       routes: {
         prefix: Config.get('backend.prefix')
       }
+    });
+  }
+
+  // 若 frontend.enable 为 true，则加载 frontend 服务
+  if (Config.has('frontend.enable') && Config.get('frontend.enable')) {
+    services.push({
+      register: webpack
+    })
+    services.push({
+      register: frontend,
+      options: getConfig('frontend.options')
     });
   }
 
