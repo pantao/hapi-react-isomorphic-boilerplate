@@ -53,7 +53,7 @@ export default class Html extends Component {
     const initialState = store.getState();
 
     let _html = `window.__INITIAL_STATE__ = ${Serialize(initialState)};`;
-    _html += `window.__FRONTEND__ = ${Serialize(__FRONTEND__)};`;
+    _html += `window.__HELMET__ = ${Serialize(__HELMET__)};`;
     _html += `window.__DEVELOPMENT__ = ${Serialize(__DEVELOPMENT__)};`;
     _html += `window.__TESTING__ = ${Serialize(__TESTING__)};`;
     _html += `window.__SERVER__ = ${Serialize(false)};`;

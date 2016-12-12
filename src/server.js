@@ -6,7 +6,7 @@ import Hapi from 'hapi';
 import Inert from 'inert';
 import Vision from 'vision';
 import Good from 'good';
-import Swagger from 'hapi-swagger';
+import HapiSwagger from 'hapi-swagger';
 import H2o2 from 'h2o2';
 
 import backend from './backend';
@@ -36,7 +36,7 @@ const boot = callback => {
     register: Good,
     options: Config.get('logger')
   });
-  
+
   if (Config.has('public.enable') && Config.get('public.enable')) {
     server.log(['log', 'server', 'bootstrap', 'service', 'config'], getConfig('public'));
     server.route({
@@ -87,7 +87,7 @@ const boot = callback => {
   if (Config.has('swagger.enable') && Config.get('swagger.enable')) {
     server.log(['log', 'server', 'bootstrap', 'service', 'config'], getConfig('swagger'));
     services.push({
-      register: Swagger,
+      register: HapiSwagger,
       options: getConfig('swagger.options')
     });
   }

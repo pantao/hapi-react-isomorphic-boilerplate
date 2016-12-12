@@ -25,11 +25,23 @@ backend:
   prefix: /api
   options:
     enableTesting: true
+    auth:
+      roles:
+        - SUPER
+        - MANAGER
+        - CLIENT
+        - USER
+      jwt:
+        secret: 24CC51A1D75D4736AEB38782617DEDC02E7A79ECD6FA9D49545386B138AC6658
+        algorithms: HS256
+      cookie:
+        secret: 24CC51A1D75D4736AEB38782617DEDC02E7A79ECD6FA9D49545386B138AC6658
+        algorithms: HS256
 
 frontend:
   enable: true
   options: {}
-  global:
+  helmet:
     title: 'Hapi React Isomorphic Boilerplate'
     description: '基于 HapiJS, ReactJS 的前后端同构样板'
     head:

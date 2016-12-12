@@ -12,7 +12,7 @@ class App extends Component {
     console.log(this.props);
     return (
       <div id='app'>
-        <Helmet {...__FRONTEND__.head} />
+        <Helmet {...__HELMET__.head} />
         <Layout { ...this.props } />
       </div>
     )

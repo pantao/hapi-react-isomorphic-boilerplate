@@ -10,4 +10,4 @@ global.__DEVELOPMENT__ = enviroment === 'development';
 global.__TESTING__ = enviroment === 'testing';
 global.__PRODUCTION__ = enviroment === 'production';
 
-global.__FRONTEND__ = Config.get('frontend.global');
+global.__HELMET__ = Config.get('frontend.helmet');
