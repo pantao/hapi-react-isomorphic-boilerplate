@@ -19,7 +19,8 @@ public:
   options:
     path: public
     redirectToSlash: true
-    index: false
+    index: false,
+    lookupCompressed: true
 
 backend:
   enable: true

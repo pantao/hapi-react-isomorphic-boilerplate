@@ -1,0 +1,10 @@
+apps:
+  - name: hrib
+    script: index.js
+    watch: true
+    env:
+      NODE_ENV: development
+    env_production:
+      NODE_ENV: production
+    env_testing:
+      NODE_ENV: testing

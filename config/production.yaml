@@ -1,0 +1,5 @@
+server:
+  connection:
+    host: 127.0.0.1
+    port: 7000
+    uri: http://127.0.0.1:7000
