@@ -56,12 +56,6 @@ proxy:
         uri: http://127.0.0.1:5000
         passThrough: true
         xforward: true
-      -
-        enable: true
-        name: bang
-        uri: http://10.141.4.207:8080
-        passThrough: true
-        xforward: true
 
 swagger:
   enable: true
