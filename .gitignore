@@ -35,3 +35,13 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
+
+# Packed bundle assets
+public/assets/*
+
+# OSX ds store files
+.DS_Store
+
+# Temp & cache files
+.tmp
+.cache

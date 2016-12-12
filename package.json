@@ -1,0 +1,74 @@
+{
+  "name": "hapi-react-isomorphic-boilerplate",
+  "version": "0.0.0",
+  "description": "基于 HapiJS, ReactJS 的前后端同构样板项目",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "develop": "node ./node_modules/nodemon/bin/nodemon.js index.js",
+    "build": "node ./node_modules/webpack/bin/webpack.js -p --progress --stats --config ./src/webpack/production.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pantao/hapi-react-isomorphic-boilerplate.git"
+  },
+  "keywords": [
+    "Hapi",
+    "React",
+    "Redux",
+    "Isomorphic",
+    "Boilerplate",
+    "同构"
+  ],
+  "author": "潘韬 <54778899@qq.com> (http://onmr.com)",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/pantao/hapi-react-isomorphic-boilerplate/issues"
+  },
+  "homepage": "https://github.com/pantao/hapi-react-isomorphic-boilerplate#readme",
+  "dependencies": {
+    "babel": "^6.5.2",
+    "babel-core": "^6.20.0",
+    "babel-loader": "^6.2.9",
+    "babel-plugin-react-transform": "^2.0.2",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-plugin-transform-runtime": "^6.15.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.16.0",
+    "babel-preset-stage-0": "^6.16.0",
+    "bluebird": "^3.4.6",
+    "boom": "^4.2.0",
+    "config": "^1.24.0",
+    "good": "^7.1.0",
+    "good-console": "^6.2.0",
+    "good-file": "^6.0.1",
+    "good-squeeze": "^5.0.1",
+    "hapi": "^16.0.1",
+    "hapi-swagger": "^7.5.0",
+    "inert": "^4.0.3",
+    "isomorphic-fetch": "^2.2.1",
+    "joi": "^10.0.5",
+    "lodash": "^4.17.2",
+    "moment": "^2.17.1",
+    "path": "^0.12.7",
+    "query-string": "^4.2.3",
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1",
+    "react-helmet": "^3.2.3",
+    "react-redux": "^4.4.6",
+    "react-router": "^3.0.0",
+    "react-router-redux": "^4.0.7",
+    "react-transform-catch-errors": "^1.0.2",
+    "react-transform-hmr": "^1.0.4",
+    "redbox-react": "^1.3.3",
+    "redux": "^3.6.0",
+    "redux-form": "^6.3.2",
+    "vision": "^4.1.1",
+    "webpack": "^1.14.0",
+    "webpack-dev-middleware": "^1.8.4",
+    "webpack-hot-middleware": "^2.13.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
