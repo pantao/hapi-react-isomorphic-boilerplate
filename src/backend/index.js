@@ -45,6 +45,27 @@ const register = (server, options, next) => {
         });
       }
     });
+
+    server.route({
+      method: 'POST',
+      path: '/sign/in',
+      config: {
+        auth: false,
+        tags: ['api', 'testing', 'session'],
+        validate: {
+          payload: Joi.object().keys({
+            login: Joi.string().email().required().description('邮箱地址'),
+            password: Joi.string().min(4).required().description('帐户密码')
+          })
+        }
+      },
+      handler: (request, reply) => {
+        reply({
+          token: 'TOKEN',
+          credentials: request.payload
+        });
+      }
+    })
   }
 
   return next();

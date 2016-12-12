@@ -7,20 +7,12 @@ class Page extends Component {
     super(props);
   }
 
-  renderSignRedirectTest() {
-    if(this.props.session && this.props.session.token) {
-      return <Link to='/sign'>此链接指向/sign，但您会自动跳转至 /dashboard</Link>
-    } else {
-      return null;
-    }
-  }
-
   render() {
     return (
       <section>
-        <h1>首页</h1>
+        <h1>控制面板</h1>
         <hr />
-        {this.renderSignRedirectTest()}
+        <h2>{ this.props.session.credentials.login }, 您好</h2>
       </section>
     );
   }

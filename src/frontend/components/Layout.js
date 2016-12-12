@@ -9,13 +9,14 @@ class Layout extends Component {
 
   render() {
     const childrenProps = this.props;
+    console.log('children props: ', childrenProps);
     const childrenWithProps = React.Children.map(this.props.children, child => {
-      return React.cloneElement(child, {'children': childrenProps});
+      return React.cloneElement(child, childrenProps);
     });
 
     return (
       <div id="layout">
-        <Navigator { ...this.props } />
+        <Navigator { ...this.props }/>
         <div id="pusher">
           {childrenWithProps}
         </div>

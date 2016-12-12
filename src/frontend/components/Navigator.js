@@ -13,14 +13,6 @@ const links = [
   {
     path: '/testing',
     title: '测试'
-  },
-  {
-    path: '/sign',
-    title: '登录'
-  },
-  {
-    path: '/dashboard',
-    title: '控制面板'
   }
 ];
 
@@ -35,6 +27,11 @@ class Navigator extends Component {
       <nav>
         {
           links.map( (link, index) => <Link to={link.path} key={index} className={ pathname === link.path ? 'current' : ''}>{link.title}</Link>)
+        }
+        {
+          this.props.session.token
+          ? <Link to='/dashboard' className={ pathname === '/dashboard' ? 'current' : ''}>控制面板</Link>
+          : <Link to='/sign' className={ pathname === '/sign' ? 'current' : ''}>登录</Link>
         }
       </nav>
     )

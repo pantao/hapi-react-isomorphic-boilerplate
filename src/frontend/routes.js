@@ -3,8 +3,33 @@ import TestingContainer from './containers/Testing';
 
 import IndexPage from './pages/Index';
 import AboutPage from './pages/About';
+import SignPage from './pages/Sign';
+import DashboardPage from './pages/Dashboard';
 
 export default store => {
+
+  const checkSession = callback => {
+    const { session } = store.getState();
+    callback(session);
+  }
+
+  const redirectToSign = (next, replace, callback) => {
+    checkSession( session => {
+      if(!session.token) {
+        replace('/sign')
+      }
+      callback()
+    });
+  }
+
+  const redirectToDashboard = (next, replace, callback) => {
+    checkSession( session => {
+      if(session.token) {
+        replace('/dashboard')
+      }
+      callback()
+    });
+  }
 
   return [{
     path: '/',
@@ -15,6 +40,14 @@ export default store => {
     childRoutes: [{
       path: '/about',
       component: AboutPage
+    },{
+      path: '/sign',
+      onEnter: redirectToDashboard,
+      component: SignPage
+    },{
+      path: '/dashboard',
+      onEnter: redirectToSign,
+      component: DashboardPage
     },{
       path: '/testing',
       component: TestingContainer
