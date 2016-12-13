@@ -58,6 +58,8 @@ frontend:
       link:
         - rel: stylesheet
           href: /static/css/demo.css
+        - rel: 'favicon icon'
+          href: /static/img/favicon.png
 
 proxy:
   enable: true
