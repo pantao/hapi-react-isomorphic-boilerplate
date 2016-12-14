@@ -12,7 +12,6 @@ class Testing extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <section>
       <Helmet title='测试' />

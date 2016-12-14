@@ -20,11 +20,19 @@ public:
     index: false,
     lookupCompressed: true
 
-backend:
+session:
   enable: true
-  prefix: /api
   options:
-    enableTesting: true
+    cookie:
+      name: sid
+      password: 24CC51A1D75D4736AEB38782617DEDC02E7A79ECD6FA9D49545386B138AC6658
+      ttl: 86400000
+      domain: null
+      path: /
+      encoding: none
+      clearInvalid: false
+      isSecure: false
+      isHttpOnly: false
     auth:
       roles:
         - SUPER
@@ -37,6 +45,12 @@ backend:
       cookie:
         secret: 24CC51A1D75D4736AEB38782617DEDC02E7A79ECD6FA9D49545386B138AC6658
         algorithms: HS256
+
+backend:
+  enable: true
+  prefix: /api
+  options:
+    enableTesting: true
 
 frontend:
   enable: true

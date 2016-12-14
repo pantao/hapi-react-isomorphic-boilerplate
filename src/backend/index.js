@@ -1,13 +1,9 @@
 import _ from 'lodash';
 import Joi from 'joi';
 
-import HapiJWT from 'hapi-auth-jwt2';
-import HapiAuthorization from 'hapi-authorization';
-
 import {
-  generateJsonWebToken,
-  validateJsonWebToken
-} from './helpers';
+  generateJsonWebToken
+} from '../session/helpers';
 
 /**
  * 服务器后端模块
@@ -20,14 +16,7 @@ import {
  * @return {mixed}                  多类型返回值
  */
 const defaults = {
-  enableTesting: false,
-  auth: {
-    enable: true,
-    jwt: {
-      enable: true,
-      key: 'jwtk'
-    }
-  }
+  enableTesting: false
 }
 
 const initTestingRoutes = (server, options ) => {
@@ -73,11 +62,16 @@ const initTestingRoutes = (server, options ) => {
     handler: (request, reply) => {
       const credentials = request.payload;
       credentials.id = 0;
-      const token = generateJsonWebToken(credentials, options.auth.jwt.secret);
-      reply({
+      const token = request.session.generateJsonWebToken(credentials);
+      let authed = {
         token,
         credentials
-      }).state('authorization', token);
+      };
+      request.session.create(authed).then( sid => {
+        reply(authed).state('sid', sid );
+      }).catch(e => {
+        reply(e);
+      });
     }
   });
 
@@ -104,42 +98,8 @@ const register = (server, options, next) => {
     config = _.assign(config, options);
   }
 
-  server.state('authorization', {
-    ttl: 3600 * 1000 * 24,
-    isSecure: true,
-    isHttpOnly: false,
-    encoding: 'none',
-    clearInvalid: false,
-    strictHeader: false
-  });
-
-  const plugins = [];
-  plugins.push({
-    register: HapiJWT
-  });
-  plugins.push({
-    register: HapiAuthorization,
-    options: {
-      roles: options.auth.roles
-    }
-  });
-
-  server.register(plugins, err => {
-    if(err) {
-      server.log(['api', 'backend', 'plugin', 'register'], err);
-    }
-    server.auth.strategy('jwt', 'jwt', {
-      key: config.auth.jwt.secret,
-      validateFunc: validateJsonWebToken,
-      verifyOptions: {
-        algorithms: config.auth.jwt.algorithms
-      }
-    });
-    server.auth.default('jwt');
-    initTestingRoutes(server, config);
-    return next();
-  });
-
+  initTestingRoutes(server, config);
+  next();
 };
 
 register.attributes = {

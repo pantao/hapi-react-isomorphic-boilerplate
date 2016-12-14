@@ -13,6 +13,7 @@ import backend from './backend';
 import frontend from './frontend';
 import proxy from './proxy';
 import webpack from './webpack';
+import session from './session';
 
 const getConfig = endpoint => {
   return JSON.parse(JSON.stringify(Config.get(endpoint)));
@@ -56,6 +57,10 @@ const boot = callback => {
 
   // 注册基础服务
   const services = [];
+  services.push({
+    register: session,
+    options: getConfig('session.options')
+  });
   // 若 proxy.enable 为 true，则加载 proxy 服务
   if (Config.has('proxy.enable') && Config.get('proxy.enable')) {
     server.log(['log', 'server', 'bootstrap', 'service', 'config'], getConfig('proxy'));

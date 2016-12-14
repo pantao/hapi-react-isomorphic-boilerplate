@@ -80,7 +80,9 @@ class Fetcher {
           try {
             let authorization = localStorage.getItem('authorization');
             authorization = JSON.parse(authorization);
-            headers.authorization = authorization;
+            if(authorization) {
+              headers.authorization = authorization;
+            }
           } catch(e) {
 
           }

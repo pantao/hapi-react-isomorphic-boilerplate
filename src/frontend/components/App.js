@@ -9,7 +9,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <div id='app'>
         <Helmet {...__HELMET__.head} />

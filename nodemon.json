@@ -3,6 +3,7 @@
     "src/backend/**.js",
     "src/frontend/**.js",
     "src/proxy/**.js",
+    "src/session/**.js",
     "src/helpers/**.js",
     "src/api/**/**",
     "src/server.js",

@@ -9,7 +9,6 @@ class Layout extends Component {
 
   render() {
     const childrenProps = this.props;
-    console.log('children props: ', childrenProps);
     const childrenWithProps = React.Children.map(this.props.children, child => {
       return React.cloneElement(child, childrenProps);
     });
