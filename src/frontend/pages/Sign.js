@@ -40,12 +40,6 @@ class Page extends Component {
         <br/>
         <hr/>
         <form onSubmit={this.onSubmit}>
-          {this.props.session.error
-            ? <div>
-                {this.props.session.error.message}
-              </div>
-            : null
-}
           <input placeholder='用户名' name='login' onChange={this.handleFormField}/>
           <br/>
           <input placeholder='密码：123456' type='password' name='password' onChange={this.handleFormField}/>

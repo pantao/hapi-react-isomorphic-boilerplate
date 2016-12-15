@@ -38,6 +38,7 @@
     "babel-preset-stage-0": "^6.16.0",
     "bluebird": "^3.4.6",
     "boom": "^4.2.0",
+    "catbox-redis": "^2.0.2",
     "config": "^1.24.0",
     "css-loader": "^0.26.1",
     "file-loader": "^0.9.0",
@@ -47,6 +48,7 @@
     "good-squeeze": "^5.0.1",
     "h2o2": "^5.4.0",
     "hapi": "^16.0.1",
+    "hapi-auth-cookie": "^6.1.1",
     "hapi-auth-jwt2": "^7.2.4",
     "hapi-authorization": "^3.0.2",
     "hapi-swagger": "^7.5.0",
@@ -81,7 +83,8 @@
     "vision": "^4.1.1",
     "webpack": "^1.14.0",
     "webpack-dev-middleware": "^1.8.4",
-    "webpack-hot-middleware": "^2.13.2"
+    "webpack-hot-middleware": "^2.13.2",
+    "xml2js": "^0.4.17"
   },
   "devDependencies": {
     "nodemon": "^1.11.0"

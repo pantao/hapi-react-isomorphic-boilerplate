@@ -8,11 +8,26 @@ import {
 } from '../actions/session';
 
 const initialState = {
-  token: '',
-  credentials: undefined,
-  me: undefined,
-  loading: false,
-  error: undefined
+  me: {
+    error: undefined,
+    loading: false,
+    loaded: false
+  },
+  signin: {
+    error: undefined,
+    loading: false,
+    loaded: false
+  },
+  signup: {
+    error: undefined,
+    loading: false,
+    loaded: false
+  },
+  signout: {
+    error: undefined,
+    loading: false,
+    loaded: false
+  }
 };
 
 const session = (state = initialState, action = {}) => {
@@ -20,43 +35,64 @@ const session = (state = initialState, action = {}) => {
     case LOAD_ME:
       return {
         ...state,
-        ...action
+        me: {
+          ...action,
+          loading: true,
+          loaded: false
+        }
       }
       break;
     case LOAD_ME_SUCCEED:
       return {
         ...state,
-        ...action.data,
-        error: null
+        me: {
+          ...action.data,
+          loading: false,
+          loaded: true
+        }
       }
       break;
     case LOAD_ME_FAILD:
       return {
         ...state,
-        ...action
+        me: {
+          ...action,
+          loading: false,
+          loaded: false
+        }
       }
       break
     case SIGN_IN:
       return {
         ...state,
-        ...action,
-        error: null
+        signin: {
+          loading: true,
+          loaded: false
+        }
       }
       break;
     case SIGN_IN_SUCCEED:
-      if(typeof window !== 'undefined') {
-        window.localStorage.setItem('authorization', JSON.stringify(action.data.token));
-      }
       return {
         ...state,
-        ...action.data,
-        error: null
+        me: {
+          ...action.data,
+          loading: false,
+          loaded: true
+        },
+        signin: {
+          loaded: true,
+          loading: false
+        }
       }
       break;
     case SIGN_IN_FAILD:
       return {
         ...state,
-        ...action
+        signin: {
+          error: action.error,
+          loading: false,
+          loaded: false
+        }
       }
       break
     default:

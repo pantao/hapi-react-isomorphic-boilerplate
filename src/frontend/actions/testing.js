@@ -13,7 +13,7 @@ export const tryTesting = () => {
   };
 }
 
-export const tryTestingProxy = ( ) => {
+export const tryTestingProxy = () => {
   return {
     type: TESTING_PROXY,
     fetch: ( fetcher ) => fetcher.get('/proxy/testing/api/testing')

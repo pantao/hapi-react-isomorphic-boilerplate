@@ -11,6 +11,7 @@ import H2o2 from 'h2o2';
 
 import backend from './backend';
 import frontend from './frontend';
+import wechat from './wechat';
 import proxy from './proxy';
 import webpack from './webpack';
 import session from './session';
@@ -23,10 +24,21 @@ const boot = callback => {
 
   // 创建 Hapi.Server 对象
   const serverConfig = getConfig('server');
+  if(serverConfig.options.cache) {
+    let cacheConfig = serverConfig.options.cache;
+    serverConfig.options.cache = _.map(cacheConfig, cc => {
+      let engine = require('catbox-' + cc.module);
+      delete cc.module;
+      return {
+        ...cc,
+        engine
+      }
+    })
+
+  }
   const server = new Hapi.Server(serverConfig.options)
 
   server.log(['log', 'server', 'bootstrap'], serverConfig);
-  console.log(serverConfig);
 
   // 创建默认连接
   server.connection(serverConfig.connection);
@@ -72,7 +84,7 @@ const boot = callback => {
       register: proxy,
       options: getConfig('proxy.options'),
       routes: {
-        prefix: Config.get('proxy.prefix')
+        prefix: Config.get('proxy.options.prefix')
       }
     });
   }
@@ -84,7 +96,7 @@ const boot = callback => {
       register: backend,
       options: getConfig('backend.options'),
       routes: {
-        prefix: Config.get('backend.prefix')
+        prefix: Config.get('backend.options.prefix')
       }
     });
   }
@@ -106,6 +118,18 @@ const boot = callback => {
     services.push({
       register: frontend,
       options: getConfig('frontend.options')
+    });
+  }
+
+  // 若 wechat.enable 为 true，则加载 wechat 服务
+  if (Config.has('wechat.enable') && Config.get('wechat.enable')) {
+    server.log(['log', 'server', 'bootstrap', 'service', 'config'], getConfig('wechat'));
+    services.push({
+      register: wechat,
+      options: getConfig('wechat.options'),
+      routes: {
+        prefix: Config.get('wechat.options.prefix')
+      }
     });
   }
 

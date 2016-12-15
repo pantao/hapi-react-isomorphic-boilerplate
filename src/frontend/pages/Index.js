@@ -8,7 +8,7 @@ class Page extends Component {
   }
 
   renderSignRedirectTest() {
-    if(this.props.session && this.props.session.token) {
+    if(this.props.session && this.props.session.me) {
       return <Link to='/sign'>此链接指向/sign，但您会自动跳转至 /dashboard</Link>
     } else {
       return null;
@@ -21,6 +21,10 @@ class Page extends Component {
         <h1>首页</h1>
         <hr />
         {this.renderSignRedirectTest()}
+        <hr />
+        <button onClick={ () => {
+            this.props.router.push('/about')
+          }}>关于</button>
       </section>
     );
   }

@@ -5,6 +5,7 @@
     "src/proxy/**.js",
     "src/session/**.js",
     "src/helpers/**.js",
+    "src/wechat/**.js",
     "src/api/**/**",
     "src/server.js",
     "src/globals.js",

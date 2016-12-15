@@ -8,7 +8,11 @@ server:
       state:
         ignoreErrors: true
         clearInvalid: true
-
+    cache:
+      - name: redisCache
+        module: redis
+        host: 127.0.0.1
+        partition: cache
   connection:
     port: 3000
 
@@ -24,7 +28,7 @@ session:
   enable: true
   options:
     cookie:
-      name: sid
+      name: session
       password: 24CC51A1D75D4736AEB38782617DEDC02E7A79ECD6FA9D49545386B138AC6658
       ttl: 86400000
       domain: null
@@ -46,10 +50,20 @@ session:
         secret: 24CC51A1D75D4736AEB38782617DEDC02E7A79ECD6FA9D49545386B138AC6658
         algorithms: HS256
 
+wechat:
+  enable: true
+  options:
+    prefix: /wechat
+    default:
+      appID: wxb174bf7f5dee6cd9
+      appSecret: 150ec24ab713afda562b13ecefa8f754
+      token: bang-web-wechat-token
+      accessToken: He3qcGr16jjGrXsba7pCQqtsgg_83F5qCbzBqbun9i7bAC5xSGBq0qIDpwCHOZgvNUZWY-MEahctUtxH9snc23ujx09S5EgAqa2-vm105wQcfjp5glSP3l9TFnoKWV7tTARgAFAAHY
+
 backend:
   enable: true
-  prefix: /api
   options:
+    prefix: /api
     enableTesting: true
 
 frontend:
@@ -77,8 +91,8 @@ frontend:
 
 proxy:
   enable: true
-  prefix: /proxy
   options:
+    prefix: /proxy
     proxies:
       -
         enable: true

@@ -4,13 +4,15 @@ import { routerMiddleware } from 'react-router-redux';
 import rootReducers from '../reducers';
 import loggerMiddleware from '../middlewares/logger';
 import fetcherMiddleware from '../middlewares/fetcher';
+import transitionMiddleware from '../middlewares/transition';
 
 const configureStore = ( history, fetcher, initialState ) => {
   let finalCreateStore;
 
   const middlewares = [
     routerMiddleware(history),
-    fetcherMiddleware(fetcher)
+    fetcherMiddleware(fetcher),
+    transitionMiddleware
   ];
 
   if ( __DEVELOPMENT__ ) {

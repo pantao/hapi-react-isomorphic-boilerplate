@@ -12,7 +12,7 @@ class Page extends Component {
       <section>
         <h1>控制面板</h1>
         <hr />
-        <h2>{ this.props.session.credentials.login }, 您好</h2>
+        <h2>{ this.props.session.me.login }, 您好</h2>
       </section>
     );
   }

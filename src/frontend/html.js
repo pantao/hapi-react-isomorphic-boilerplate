@@ -22,13 +22,12 @@ if (!__DEVELOPMENT__) {
 
 export default class Html extends Component {
   static propTypes : {
-    component: PropTypes.node,
-    store: PropTypes.object,
-    initialState: PropTypes.object
+    component: PropTypes.node
   }
 
   render() {
-    const {component, store} = this.props;
+    const {component} = this.props;
+    const { store } = component.props;
     let componentHTML = '';
     let head = '';
     let base = '';
@@ -51,6 +50,8 @@ export default class Html extends Component {
     }
 
     const initialState = store.getState();
+
+    console.log(initialState);
 
     let _html = `window.__INITIAL_STATE__ = ${Serialize(initialState)};`;
     _html += `window.__HELMET__ = ${Serialize(__HELMET__)};`;

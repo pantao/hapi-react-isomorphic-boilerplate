@@ -11,3 +11,10 @@ global.__TESTING__ = enviroment === 'testing';
 global.__PRODUCTION__ = enviroment === 'production';
 
 global.__HELMET__ = Config.get('frontend.helmet');
+
+const connection =  Config.get('server.connection');
+
+global.SERVER_HOST = connection.host || '';
+global.SERVER_PROTOCOL = connection.protocol || 'http';
+global.SERVER_PORT = connection.port;
+global.SERVER_URI = connection.uri;

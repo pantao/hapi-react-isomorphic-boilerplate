@@ -16,7 +16,7 @@ const formatUrl = (path = '', scope = '') => {
   if (__SERVER__) {
     const host = SERVER_HOST ? SERVER_HOST : '127.0.0.1';
     // 若是在服务器上，则将路径转换为带协议、主机名以及端口号的完整路径
-    return `${SERVER_PROTOCOL}${host}:${SERVER_PORT}${API_PREFIX}${adjusted}`;
+    return `${SERVER_PROTOCOL}://${host}:${SERVER_PORT}${adjusted}`;
   }
   return `${scope || ''}${adjusted}`;
 }
@@ -66,6 +66,7 @@ const parseJSON = response => {
 
 class Fetcher {
   constructor(request) {
+
     methods.forEach(method => {
       this[method] = (path, {
         headers,
@@ -76,20 +77,8 @@ class Fetcher {
         let content = '';
         headers = typeof headers === 'object' ? headers : {};
 
-        if(localStorage) {
-          try {
-            let authorization = localStorage.getItem('authorization');
-            authorization = JSON.parse(authorization);
-            if(authorization) {
-              headers.authorization = authorization;
-            }
-          } catch(e) {
-
-          }
-        }
-
-        if (__SERVER__ && request && request.headers.cookie) {
-          headers.Cookie = request.headers.cookie;
+        if (__SERVER__ && request) {
+          headers = Object.assign(headers, request.headers);
         }
 
         if (!__SERVER__ && typeof query !== 'undefined') {
