@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import { Router, RouterContext, match } from 'react-router';
-import { Provider } from 'react-redux';
+import {Router, RouterContext, match} from 'react-router';
+import {Provider} from 'react-redux';
 import createHistory from 'history/lib/createBrowserHistory';
 import Fetcher from './helpers/fetcher';
+import getDataDependencies from './helpers/getDataDependencies';
 import getRoutes from './routes';
 import configureStore from './store/configureStore';
 
@@ -14,15 +15,13 @@ const initialState = window.__INITIAL_STATE__;
 // 将 fetcher 注入到 redux fetchMiddleware 之后，即可以在 Action 中直接使用 Fetch
 const fetcher = new Fetcher();
 // 创建 store
-const store = configureStore(
-  history, fetcher, initialState
-);
+const store = configureStore(history, fetcher, initialState);
 
 const root = document.getElementById('root');
 
 // 若是开发环境，将 React 注入到 window 对象中，同时，若没有  root 元素
 // 直接报错
-if ( __DEVELOPMENT__ ) {
+if (__DEVELOPMENT__) {
   window.React = React;
 
   if (!root || !root.firstChild || !root.firstChild.attributes || !root.firstChild.attributes['data-react-checksum']) {
@@ -30,22 +29,32 @@ if ( __DEVELOPMENT__ ) {
   }
 }
 
+const onRouteChange = (before, after, replace) => {
+  // console.log('before:', before);
+  // console.log('after:', after);
+  // console.log('replace:', replace);
+  getDataDependencies(after.routes.filter(route => route.component ).map(route => route.component), store.getState, store.dispatch);
+}
+
+const routes = getRoutes(store).map(route => {
+  route.onChange = onRouteChange;
+  return route;
+});
+
 // 运行
 const run = () => {
   ReactDOM.render(
     <Provider store={store}>
-      <Router routes={ getRoutes(store) } history={ history } />
-    </Provider>,
-    root
-  );
+    <Router routes={routes} history={history}/>
+  </Provider>, root);
 };
 
 // boot 方法，启动应用
 const boot = () => {
-  if ( window.addEventListener ) {
-    window.addEventListener( 'DOMContentLoaded', run);
+  if (window.addEventListener) {
+    window.addEventListener('DOMContentLoaded', run);
   } else {
-    window.attachEvent( 'onload', run);
+    window.attachEvent('onload', run);
   }
 }
 
