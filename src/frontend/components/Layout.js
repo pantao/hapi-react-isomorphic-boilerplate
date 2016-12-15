@@ -14,9 +14,9 @@ class Layout extends Component {
     });
 
     return (
-      <div id="layout">
+      <div className="layout">
         <Navigator { ...this.props }/>
-        <div id="pusher">
+        <div className="pusher">
           {childrenWithProps}
         </div>
       </div>

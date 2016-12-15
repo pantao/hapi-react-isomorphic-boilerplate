@@ -22,7 +22,7 @@ class Navigator extends Component {
         <IndexLink to='/' activeClassName='current'>首页</IndexLink>
         {links.map((link, index) => <Link to={link.path} key={index} activeClassName='current'>{link.title}</Link>)}
         {
-          this.props.session.me
+          this.props.session.me && this.props.session.me.id
           ? <Link to='/dashboard' activeClassName='current'>控制面板</Link>
           : <Link to='/sign' activeClassName='current'>登录</Link>}
       </nav>

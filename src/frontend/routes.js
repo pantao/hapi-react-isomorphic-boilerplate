@@ -17,7 +17,7 @@ export default store => {
 
   const redirectToSign = (next, replace, callback) => {
     checkSession(session => {
-      if (!session.me) {
+      if (!session.me || session.me.error) {
         replace('/sign')
       }
       callback()
@@ -33,23 +33,24 @@ export default store => {
     });
   }
 
-  return [{
-    path: '/',
-    component: AppContainer,
-    indexRoute: {
-      component: IndexPage
-    },
-    childRoutes: [{
-      path: '/about',
-      component: AboutPage
-    }, {
-      path: '/sign',
-      onEnter: redirectToDashboard,
-      component: SignPage
-    }, {
-      path: '/dashboard',
-      onEnter: redirectToSign,
-      component: DashboardPage
-    }, TestingContainer(store)]
-  }];
+  const AppRoute = AppContainer(store);
+
+  AppRoute.indexRoute = {
+    component: IndexPage
+  };
+
+  AppRoute.childRoutes = [{
+    path: '/about',
+    component: AboutPage
+  }, {
+    path: '/sign',
+    onEnter: redirectToDashboard,
+    component: SignPage
+  }, {
+    path: '/dashboard',
+    onEnter: redirectToSign,
+    component: DashboardPage
+  }, TestingContainer(store)]
+
+  return [AppRoute];
 };

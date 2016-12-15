@@ -24,7 +24,7 @@ class Page extends Component {
         <hr />
         <button onClick={ () => {
             this.props.router.push('/about')
-          }}>关于</button>
+          }}>我是一个按钮，点击之后也会跳转至关于页面</button>
       </section>
     );
   }

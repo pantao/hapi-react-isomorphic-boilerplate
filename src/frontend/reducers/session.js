@@ -36,9 +36,9 @@ const session = (state = initialState, action = {}) => {
       return {
         ...state,
         me: {
-          ...action,
           loading: true,
-          loaded: false
+          loaded: false,
+          error: false
         }
       }
       break;
@@ -48,7 +48,8 @@ const session = (state = initialState, action = {}) => {
         me: {
           ...action.data,
           loading: false,
-          loaded: true
+          loaded: true,
+          error: false
         }
       }
       break;
@@ -56,7 +57,7 @@ const session = (state = initialState, action = {}) => {
       return {
         ...state,
         me: {
-          ...action,
+          error: action.error,
           loading: false,
           loaded: false
         }
@@ -67,7 +68,8 @@ const session = (state = initialState, action = {}) => {
         ...state,
         signin: {
           loading: true,
-          loaded: false
+          loaded: false,
+          error: false
         }
       }
       break;
@@ -77,11 +79,13 @@ const session = (state = initialState, action = {}) => {
         me: {
           ...action.data,
           loading: false,
-          loaded: true
+          loaded: true,
+          error: false
         },
         signin: {
           loaded: true,
-          loading: false
+          loading: false,
+          error: false
         }
       }
       break;

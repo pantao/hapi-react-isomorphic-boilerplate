@@ -40,7 +40,7 @@ class Page extends Component {
         <br/>
         <hr/>
         <form onSubmit={this.onSubmit}>
-          <input placeholder='用户名' name='login' onChange={this.handleFormField}/>
+          <input placeholder='用户名' name='login' type='text' onChange={this.handleFormField}/>
           <br/>
           <input placeholder='密码：123456' type='password' name='password' onChange={this.handleFormField}/>
           <br/>

@@ -1,6 +1,18 @@
 body {
   padding: 0;
   margin: 0;
+  line-height: 20px;
+}
+
+a {
+  color: #3da2f4;
+  text-decoration: none;
+  display: inline-block;
+  border-bottom: 1px dashed rgba(61,166,244, 0.5);
+}
+
+a:hover {
+  border-bottom-color: rgba(61,166,244,1);
 }
 
 nav {
@@ -13,6 +25,7 @@ nav a {
   display: inline-block;
   margin-right: 1rem;
   text-decoration: none;
+  border-bottom: none;
 }
 
 nav a.current {
@@ -31,6 +44,7 @@ pre {
   background-color: #f8f8f8;
   border: 1px solid #eee;
   padding: .5rem;
+  overflow: auto;
 }
 
 hr {
@@ -40,10 +54,22 @@ hr {
   background-color: #eee;
 }
 
-#pusher {
+.pusher {
 
 }
 
-#pusher > section {
+.pusher > section {
   padding: 1rem;
+}
+
+form {
+
+}
+
+form input[type=text],
+form input[type=password],
+form input[type=date],
+form input[type=number] {
+  padding: 10px;
+  margin: 10px 0;
 }
