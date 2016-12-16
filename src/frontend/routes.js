@@ -43,7 +43,7 @@ export default store => {
     path: '/about',
     component: AboutPage
   }, {
-    path: '/sign',
+    path: '/sign(/:action)',
     onEnter: redirectToDashboard,
     component: SignPage
   }, {

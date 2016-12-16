@@ -66,6 +66,10 @@ form {
 
 }
 
+form label {
+  display: block;
+}
+
 form input[type=text],
 form input[type=password],
 form input[type=date],
