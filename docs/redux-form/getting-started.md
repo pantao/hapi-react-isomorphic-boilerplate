@@ -91,3 +91,7 @@ export default reduxForm({
 > 如果您现在正在 `github` 上查看本文档的话，可以直接看看下面这个文件中的代码：
 >
 > - [src/frontend/components/sign/SignUpForm.js](../../src/frontend/components/sign/SignUpForm.js)
+
+----------
+
+下一篇：[理解 Field Value 的生命周期](field-value-lifecycle.md)
