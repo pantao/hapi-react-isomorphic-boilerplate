@@ -36,6 +36,8 @@ Parsed with parse()                         |
 Normalized with normalize()                 |
         |                                   |
 CHANGE action dispatched to update store  --+
-
-
 ```
+
+----------
+
+下一篇：[API: reduxForm()](api-reduxform.md)
