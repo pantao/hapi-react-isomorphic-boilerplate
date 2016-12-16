@@ -2,17 +2,6 @@ import _ from 'lodash';
 
 const namedProxies = {};
 
-const cachedHeaders = [
-  'x-auth-ua',
-  'x-auth-openid',
-  'x-auth-token',
-  'x-auth-is-android',
-  'x-auth-is-app',
-  'x-auth-is-ios',
-  'x-auth-is-wechat',
-  'x-source'
-];
-
 /**
  * 代理模块
  *
@@ -69,7 +58,7 @@ const register = (server, options, next) => {
 
         request.auth.credentials.headers = cachedHeaders;
 
-        return request.session.set(request, request.auth.credentials).then( credentials => {
+        return request.session.update(request, request.auth.credentials).then( credentials => {
           request.headers = {
             ...request.headers,
             ...credentials.headers,

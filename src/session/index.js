@@ -30,8 +30,8 @@ const register = (server, options, next) => {
       credentials.sid = sid;
 
       if (_.isObject(credentials.headers)) {
-        credentials.headers.uuid = credentials.headers.uuid || UUID.v1();
-        credentials.headers.uaid = credentials.headers.uuid;
+        credentials.headers['x-auth-uuid'] = credentials.headers['x-auth-uuid'] || UUID.v1();
+        credentials.headers['x-auth-uaid'] = credentials.headers['x-auth-uuid'];
       }
 
       return new Promise((resolve, reject) => {
@@ -43,6 +43,24 @@ const register = (server, options, next) => {
           request.cookieAuth.set({
             sid: sid
           });
+          return resolve(credentials);
+        });
+      })
+    }
+
+    expose.update = (request, credentials) => {
+      return new Promise((resolve, reject) => {
+        if(!credentials.sid) {
+          return reject(new Error('没有 sid'));
+        }
+        if (_.isObject(credentials.headers)) {
+          credentials.headers['x-auth-uuid'] = credentials.headers['x-auth-uuid'] || UUID.v1();
+          credentials.headers['x-auth-uaid'] = credentials.headers['x-auth-uuid'];
+        }
+        cache.set(credentials.sid, credentials, 0, err => {
+          if (err) {
+            return reject(err);
+          }
           return resolve(credentials);
         });
       })
