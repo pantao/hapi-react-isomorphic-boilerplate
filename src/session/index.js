@@ -26,15 +26,24 @@ const register = (server, options, next) => {
 
     const expose = {};
     expose.set = (request, credentials) => {
-      let sid = UUID.v1().replace(/-/g, '');
-      return new Promise( (resolve, reject) => {
+      let sid = credentials.sid || UUID.v1().replace(/-/g, '');
+      credentials.sid = sid;
+
+      if (_.isObject(credentials.headers)) {
+        credentials.headers.uuid = credentials.headers.uuid || UUID.v1();
+        credentials.headers.uaid = credentials.headers.uuid;
+      }
+
+      return new Promise((resolve, reject) => {
         cache.set(sid, credentials, 0, err => {
-          if(err) {
+          if (err) {
             return reject(err);
           }
 
-          request.cookieAuth.set({ sid: sid });
-          return resolve(sid);
+          request.cookieAuth.set({
+            sid: sid
+          });
+          return resolve(credentials);
         });
       })
     }
@@ -49,9 +58,7 @@ const register = (server, options, next) => {
       validateFunc: (reqeust, session, callback) => {
         cache.get(session.sid, (err, cached) => {
           if (err) return callback(err, false);
-
-          if(!cached) return callback(null, false);
-
+          if (!cached) return callback(null, false);
           return callback(null, true, cached);
         });
       }

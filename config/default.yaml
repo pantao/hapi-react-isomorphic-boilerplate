@@ -107,6 +107,16 @@ proxy:
           - PUT
           - DELETE
           - OPTIONS
+        headers:
+          - x-auth-ua
+          - x-auth-token
+          - x-auth-openid
+          - x-auth-is-ios
+          - x-auth-is-app
+          - x-auth-is-android
+          - x-auth-is-wechat
+          - x-auth-uuid
+          - x-auth-uaid
 
 swagger:
   enable: true

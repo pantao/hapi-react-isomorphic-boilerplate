@@ -43,8 +43,8 @@ const register = (server, options, next) => {
     handler: (request, reply) => {
       const credentials = request.payload;
       credentials.id = Math.floor(Math.random() * 10000000);
-      request.session.set(request, credentials).then( sid => {
-        reply(credentials).state('sid', sid );
+      request.session.set(request, credentials).then( credentials => {
+        reply(credentials).state('sid', credentials.sid );
       }).catch(e => {
         reply(e);
       });

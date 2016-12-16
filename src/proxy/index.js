@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-const proxyPrefixes = [];
+const namedProxies = {};
 
 const cachedHeaders = [
   'x-auth-ua',
@@ -27,7 +27,7 @@ const register = (server, options, next) => {
 
   if (_.isObject(options) && _.isArray(options.proxies)) {
     const proxies = _(options.proxies).filter(p => p.enable).map(p => {
-      proxyPrefixes.push(`${options.prefix}/${p.name}`);
+      namedProxies[`${options.prefix}/${p.name}`] = p;
       return {
         method: p.methods || ['GET', 'POST', 'PATCH', 'PUT', 'OPTIONS', "DELETE"],
         path: `/${p.name}/{path*}`,
@@ -37,7 +37,6 @@ const register = (server, options, next) => {
             xforward: p.xforward,
             mapUri: (request, callback) => {
               const uri = `${p.uri}/${request.params.path}`;
-              console.log(uri);
               callback(null, uri, request.headers)
             }
           }
@@ -48,23 +47,41 @@ const register = (server, options, next) => {
   }
 
   server.ext('onPreHandler', (request, reply) => {
-    let matched = _(proxyPrefixes).find(p => {
+    let matched = _(Object.keys(namedProxies)).find(p => {
+
       return request.path.indexOf(p) === 0;
     });
     if (matched) {
 
-      // append cached headers
-      request.headers = {
-        ...request.headers,
-        'x-auth-ua': request.headers['user-agent']
+      let proxy = namedProxies[matched];
+
+      if (proxy && proxy.headers) {
+        const {
+          headers
+        } = request.auth.credentials;
+
+        const cachedHeaders = {};
+        _(proxy.headers).each(ch => {
+          cachedHeaders[ch] = request.headers[ch] || (_.isObject(headers) ? headers[ch] : '') || '';
+        });
+
+        console.log('cachedHeaders =>>>>>>>>>', request.headers);
+
+        request.auth.credentials.headers = cachedHeaders;
+
+        return request.session.set(request, request.auth.credentials).then( credentials => {
+          request.headers = {
+            ...request.headers,
+            ...credentials.headers,
+            'x-auth-ua': request.headers['user-agent']
+          }
+          reply.continue()
+        }, e => {
+          reply(e);
+        }).catch(e => {
+          reply(e);
+        });
       }
-
-      const credentials = request.auth.credentials;
-
-      _(cachedHeaders).each( ch => {
-        request.headers[ch] = request.headers[ch] || credentials[ch] || '';
-      });
-
     }
     reply.continue();
   });
