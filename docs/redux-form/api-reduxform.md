@@ -262,3 +262,7 @@ switch(trigger) {
 ### wrappedInstance : ReactElement
 
 一个指向被 `reduxForm()` 修饰的原始的 `React.Component`。
+
+----------
+
+下一篇：[props](api-props.md)
