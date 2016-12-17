@@ -8,9 +8,7 @@ export default function connectData(fetchData, fetchDataDeferred, dependencies) 
   return WrappedComponent => {
     class Connected extends Component {
       render() {
-        return <WrappedComponent {...this.props
-        }
-        />;
+        return <WrappedComponent {...this.props} />;
       }
     }
 
