@@ -5,15 +5,32 @@ const WebpackStrip = require('strip-loader');
 
 module.exports = {
   devtool: 'eval',
-  entry: [
-    './src/frontend/client.js'
-  ],
+  entry: {
+    client: './src/frontend/client.js',
+    vendor: [
+      'react',
+      'react-dom',
+      'isomorphic-fetch',
+      'redux',
+      'react-redux',
+      'redux-form',
+      'react-router',
+      'react-router-redux',
+      'query-string',
+      'react-helmet',
+      'bluebird'
+    ]
+  },
   output: {
     path: './public/assets/',
     filename: '[name]-[hash].min.js',
     publicPath: '/assets/'
   },
   plugins: [
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      filename: '[name]-[hash].min.js'
+    }),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({
       compressor: {
