@@ -1,5 +1,6 @@
 import AppContainer from './containers/App';
 import TestingContainer from './containers/Testing';
+import TodoContainer from './containers/Todo';
 
 import IndexPage from './pages/Index';
 import AboutPage from './pages/About';
@@ -50,7 +51,7 @@ export default store => {
     path: '/dashboard',
     onEnter: redirectToSign,
     component: DashboardPage
-  }, TestingContainer(store)]
+  }, TestingContainer(store), TodoContainer(store)]
 
   return [AppRoute];
 };

@@ -77,3 +77,25 @@ form input[type=number] {
   padding: 10px;
   margin: 10px 0;
 }
+
+ul {
+  list-style: none;
+  margin: 1em 0;
+  padding: 0;
+}
+
+ul li {
+  line-height: 40px;
+  border-bottom: 1px dashed #eee;
+}
+ul li:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+#todo {
+  max-width: 400px;
+}
+
+#todo input {
+  width: 80%;
+}

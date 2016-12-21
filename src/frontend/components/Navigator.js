@@ -7,6 +7,9 @@ const links = [{
   }, {
     path: '/testing',
     title: '测试'
+  }, {
+    path: '/todo',
+    title: '任务列表'
   }
 ];
 
